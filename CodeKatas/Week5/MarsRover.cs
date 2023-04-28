@@ -20,10 +20,7 @@ public class MarsRover
 
     public void ExecuteCommands()
     {
-        foreach (var command in Commands)
-        {
-            command.Execute(this);
-        }
+        Commands.ForEach(c => c.Execute(this));
         Commands.Clear();
     }
 }
