@@ -37,15 +37,15 @@ public class MarsRoverTests
 
     public static object[] TurnCases =
     {   //Left
-        new object[] { 1, MarsRoverDirections.North, MarsRoverDirections.West },
-        new object[] { 1, MarsRoverDirections.West, MarsRoverDirections.South },
-        new object[] { 1, MarsRoverDirections.South, MarsRoverDirections.East },
-        new object[] { 1, MarsRoverDirections.East, MarsRoverDirections.North },
+        new object[] { MarsRoverDirections.Left, MarsRoverDirections.North, MarsRoverDirections.West },
+        new object[] { MarsRoverDirections.Left, MarsRoverDirections.West, MarsRoverDirections.South },
+        new object[] { MarsRoverDirections.Left, MarsRoverDirections.South, MarsRoverDirections.East },
+        new object[] { MarsRoverDirections.Left, MarsRoverDirections.East, MarsRoverDirections.North },
         //Right
-        new object[] { -1, MarsRoverDirections.North, MarsRoverDirections.East },
-        new object[] { -1, MarsRoverDirections.East, MarsRoverDirections.South },
-        new object[] { -1, MarsRoverDirections.South, MarsRoverDirections.West },
-        new object[] { -1, MarsRoverDirections.West, MarsRoverDirections.North }
+        new object[] { MarsRoverDirections.Right, MarsRoverDirections.North, MarsRoverDirections.East },
+        new object[] { MarsRoverDirections.Right, MarsRoverDirections.East, MarsRoverDirections.South },
+        new object[] { MarsRoverDirections.Right, MarsRoverDirections.South, MarsRoverDirections.West },
+        new object[] { MarsRoverDirections.Right, MarsRoverDirections.West, MarsRoverDirections.North }
     };
 
 }
