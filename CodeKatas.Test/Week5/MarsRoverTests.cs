@@ -12,12 +12,12 @@ public class MarsRoverTests
     public void ExecuteCommand_MoveForwardCommand_Success()
     {
         var goForwardsCommands = new List<Command> {new MoveCommand(1)};
-        var initialPosition = Matrix<double>.Build.DenseOfArray(new double[,] { {0}, {0} });
+        var initialPosition = MarsRover.BuildPosition(0, 0);
         var marsRover = new MarsRover(initialPosition, MarsRoverDirections.North, goForwardsCommands);
 
         marsRover.ExecuteCommands();
 
-        var expectedEndPosition = Matrix<double>.Build.DenseOfArray(new double[,] { {0}, {1} });
+        var expectedEndPosition = MarsRover.BuildPosition(0, 1);
         marsRover.Should().BeEquivalentTo(new MarsRover(expectedEndPosition, MarsRoverDirections.North, new List<Command>()));
     }
     
@@ -25,7 +25,7 @@ public class MarsRoverTests
     public void ExecuteCommand_TurnCommand_CorrectEndDirection(int turnDirection, Matrix<double> beginDirection, Matrix<double> endDirection)
     {
         var commands = new List<Command> {new TurnCommand(turnDirection)};
-        var position = Matrix<double>.Build.DenseOfArray(new double[,] { {0}, {0} } );
+        var position = MarsRover.BuildPosition(0, 0 );
         var marsRover = new MarsRover(position, beginDirection, commands);
 
         marsRover.ExecuteCommands();

@@ -6,6 +6,11 @@ namespace CodeKatas.Week5;
 
 public class MarsRover
 {
+    public static Matrix<double> BuildPosition(int x, int y)
+    {
+        return Matrix<double>.Build.DenseOfArray(new double[,] { {x}, {y} });
+    }
+
     public Matrix<double> Position;
     public Matrix<double> Direction;
     
