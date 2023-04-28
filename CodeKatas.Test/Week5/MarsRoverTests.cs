@@ -1,6 +1,8 @@
 ﻿using System.Drawing;
 using CodeKatas.Week5;
 using FluentAssertions;
+using MathNet.Numerics;
+using MathNet.Numerics.LinearAlgebra;
 
 namespace CodeKatas.Test.Week5;
 
@@ -10,22 +12,27 @@ public class MarsRoverTests
     public void ExecuteCommand_MoveForwardCommand_Success()
     {
         var goForwardsCommands = new List<Command> {new MoveCommand(1)};
-        var marsRover = new MarsRover(new Point(0,0), MarsRoverDirections.North, goForwardsCommands);
+        var initialPosition = Matrix<double>.Build.DenseOfArray(new double[,] { {0}, {0} });
+        var marsRover = new MarsRover(initialPosition, MarsRoverDirections.North, goForwardsCommands);
 
         marsRover.ExecuteCommands();
 
-        marsRover.Should().BeEquivalentTo(new MarsRover(new Point(0,1), MarsRoverDirections.North, new List<Command>()));
+        var expectedEndPosition = Matrix<double>.Build.DenseOfArray(new double[,] { {0}, {1} });
+        marsRover.Should().BeEquivalentTo(new MarsRover(expectedEndPosition, MarsRoverDirections.North, new List<Command>()));
     }
     
     [TestCaseSource(nameof(TurnCases))]
-    public void ExecuteCommand_TurnCommand_CorrectEndDirection(int turnDirection, Point beginDirection, Point endDirection)
+    public void ExecuteCommand_TurnCommand_CorrectEndDirection(int turnDirection, Matrix<double> beginDirection, Matrix<double> endDirection)
     {
         var commands = new List<Command> {new TurnCommand(turnDirection)};
-        var marsRover = new MarsRover(new Point(0,0), beginDirection, commands);
+        var position = Matrix<double>.Build.DenseOfArray(new double[,] { {0}, {0} } );
+        var marsRover = new MarsRover(position, beginDirection, commands);
 
         marsRover.ExecuteCommands();
 
-        marsRover.Should().BeEquivalentTo(new MarsRover(new Point(0,0), endDirection, new List<Command>()));
+        marsRover.Position.Should().Be(position);
+        //Avoid rounding errors
+        marsRover.Direction.AlmostEqual(endDirection, 1E-6).Should().BeTrue();
     }
 
     public static object[] TurnCases =

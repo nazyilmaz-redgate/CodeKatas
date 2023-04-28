@@ -1,16 +1,17 @@
 ﻿using System.Drawing;
+using MathNet.Numerics.LinearAlgebra;
 
 
 namespace CodeKatas.Week5;
 
 public class MarsRover
 {
-    public Point Position;
-    public Point Direction;
+    public Matrix<double> Position;
+    public Matrix<double> Direction;
     
     private readonly List<Command> Commands;
 
-    public MarsRover(Point position, Point direction, List<Command> commands)
+    public MarsRover(Matrix<double> position, Matrix<double> direction, List<Command> commands)
     {
         Position = position;
         Direction = direction;
